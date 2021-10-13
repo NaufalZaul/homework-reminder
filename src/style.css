@@ -93,7 +93,7 @@ body,
 
 .container .main {
   padding: 1em;
-  padding-left: 5em;
+  padding-left: 4em;
   width: 100%;
 }
 
@@ -106,31 +106,6 @@ body,
   margin: 3em auto 0;
   text-align: right;
   font-family: 'IBM Plex Serif', serif;
-}
-
-.container .main .profil {
-  display: none;
-}
-
-.container .main .profil main {
-  text-align: center;
-  margin-top: 4em;
-}
-
-.container .main .profil main img {
-  width: 10%;
-  border: 2px solid bisque;
-  padding: .5em;
-  border-radius: 50%;
-}
-
-.container .main .profil main .far {
-  font-size: 100px;
-}
-
-.container .main .profil main h2,
-.container .main .profil main h3 {
-  margin: 1.5em auto;
 }
 
 .container .main .create {
@@ -156,7 +131,7 @@ body,
 }
 
 .container .main .create main button {
-  width: 20%;
+  width: 40%;
   text-align: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -327,10 +302,11 @@ body,
     font-size: 15px;
   }
   .container .main .header h1 {
-    font-size: 25px;
+    font-size: 22px;
   }
   .container .main .header p {
     margin: 2em auto;
+    font-size: 10px;
   }
   .container .main .create main {
     width: 100%;

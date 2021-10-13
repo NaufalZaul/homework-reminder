@@ -198,9 +198,13 @@ class App extends React.Component {
 
   menuClick(e){
     const main = document.querySelector('.menu main')
+    const menu = document.querySelector('.container')
     const target = e.target
 
+    // console.log(menu)
+
     if(target.id == 'menu'){
+      menu.firstChild.classList.toggle('menuDisplay')
       main.classList.toggle('toggleDisplay')
     } else if(target.id == 'create'){
       display('create', 'homework', 'recent', 'deadline')
