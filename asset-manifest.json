@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/homework-reminder/static/css/main.454854f4.chunk.css",
+    "main.css": "/homework-reminder/static/css/main.64b17b00.chunk.css",
     "main.js": "/homework-reminder/static/js/main.d4d61615.chunk.js",
     "main.js.map": "/homework-reminder/static/js/main.d4d61615.chunk.js.map",
     "runtime-main.js": "/homework-reminder/static/js/runtime-main.3e265855.js",
@@ -8,14 +8,14 @@
     "static/js/2.2eed767b.chunk.js": "/homework-reminder/static/js/2.2eed767b.chunk.js",
     "static/js/2.2eed767b.chunk.js.map": "/homework-reminder/static/js/2.2eed767b.chunk.js.map",
     "index.html": "/homework-reminder/index.html",
-    "static/css/main.454854f4.chunk.css.map": "/homework-reminder/static/css/main.454854f4.chunk.css.map",
+    "static/css/main.64b17b00.chunk.css.map": "/homework-reminder/static/css/main.64b17b00.chunk.css.map",
     "static/js/2.2eed767b.chunk.js.LICENSE.txt": "/homework-reminder/static/js/2.2eed767b.chunk.js.LICENSE.txt",
     "static/media/IG.80e598d8.png": "/homework-reminder/static/media/IG.80e598d8.png"
   },
   "entrypoints": [
     "static/js/runtime-main.3e265855.js",
     "static/js/2.2eed767b.chunk.js",
-    "static/css/main.454854f4.chunk.css",
+    "static/css/main.64b17b00.chunk.css",
     "static/js/main.d4d61615.chunk.js"
   ]
 }
