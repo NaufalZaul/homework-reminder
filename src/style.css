@@ -8,7 +8,8 @@
 }
 
 :root {
-  --color: blue;
+  --color: #fff;
+  --color-bg: #1295ac;
 }
 
 html,
@@ -16,28 +17,44 @@ body,
 #root,
 .container {
   font-family: 'Ubuntu', sans-serif;
-}
-
-.container .menuDisplay {
-  width: 100%;
-  background-color: rgba(102, 97, 97, 0.5);
+  background-color: #0a9396;
 }
 
 .container .menu {
   position: fixed;
   height: 100%;
+  padding-top: .5em;
 }
 
 .container .menu .div {
-  background-color: aliceblue;
   height: 100%;
   z-index: 999;
   display: inline-block;
 }
 
-.container .menu .fas {
-  padding: .5em;
+.container .menu #menu-icon,
+.container .menu #notification,
+.container .menu #question,
+.container .menu #message {
+  padding: .5em 1em;
   font-size: 1.5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+.container .menu #notification {
+  position: relative;
+}
+
+.container .menu #notification .notification {
+  font-size: 15px;
+  top: 10px;
+  left: 35px;
+  border: 2px solid red;
+  padding: 0px 4px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: red;
 }
 
 .container .menu .toggleDisplay {
@@ -62,18 +79,18 @@ body,
   opacity: 1;
   text-align: center;
   padding: .2em 0;
-  background-color: cornflowerblue;
-  color: white;
-  -webkit-animation: liAnimation 1s ease forwards;
-          animation: liAnimation 1s ease forwards;
-  border: 2px solid black;
+  background-color: #94d2bd;
+  color: #000;
+  -webkit-box-shadow: -2px -2px white;
+          box-shadow: -2px -2px white;
   border-radius: 20px;
 }
 
-.container .menu .toggleDisplay ul li .fas {
+.container .menu .toggleDisplay ul li .warning {
   display: none;
   color: red;
   font-size: 1em;
+  padding-left: 2em;
   -webkit-animation: deadlineAnimation 1s ease infinite forwards running;
           animation: deadlineAnimation 1s ease infinite forwards running;
 }
@@ -87,7 +104,58 @@ body,
   border: 2px solid black;
 }
 
-.container .menu ul {
+.container .menuDisplay {
+  width: 100%;
+  background-color: rgba(102, 97, 97, 0.5);
+  color: #fff;
+}
+
+.container .menuDisplay #menu-icon,
+.container .menuDisplay #notification,
+.container .menuDisplay #question,
+.container .menuDisplay #message {
+  display: none;
+}
+
+.container .menuDisplay .div {
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #0a9396), color-stop(90%, #005f73));
+  background: linear-gradient(to top, #0a9396 10%, #005f73 90%);
+}
+
+.container .menuDisplay .div .close {
+  opacity: 0;
+  font-size: 1.5em;
+  margin-bottom: 2em;
+  -webkit-transform: translateX(305px) translateY(20px);
+          transform: translateX(305px) translateY(20px);
+  background-color: #fff;
+  color: red;
+  border: 2px solid red;
+  border-radius: 50%;
+  -webkit-animation: display 1s forwards;
+          animation: display 1s forwards;
+}
+
+.container .menuDisplay .div .close:active {
+  color: #fff;
+  background-color: red;
+  border: none;
+}
+
+.container .menuDisplay .div .close #close {
+  padding: 5px 10px;
+}
+
+.container .menuClose .div {
+  -webkit-animation: LiAnimation .5s forwards;
+          animation: LiAnimation .5s forwards;
+}
+
+.container .menuClose .div .close {
+  display: none;
+}
+
+.container .menuClose ul {
   display: none;
 }
 
@@ -98,25 +166,35 @@ body,
 }
 
 .container .main .header h1 {
-  font-size: 40px;
-  text-align: center;
+  font-size: 23px;
+  color: #fff;
 }
 
 .container .main .header p {
-  margin: 3em auto 0;
+  margin: -1em auto 3em;
   text-align: right;
   font-family: 'IBM Plex Serif', serif;
+  color: #fff;
 }
 
 .container .main .create {
+  width: 55%;
   display: block;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  margin: auto;
+  padding: 2em;
+}
+
+.container .main .create h1 {
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 .container .main .create main {
   display: -ms-grid;
   display: grid;
-  width: 50%;
-  margin: auto;
+  margin: auto 4em;
 }
 
 .container .main .create main label {
@@ -128,25 +206,42 @@ body,
 .container .main .create main textarea {
   padding: .5em .5em .5em 1em;
   border-radius: 20px;
+  border: 2px solid #fff;
 }
 
 .container .main .create main button {
-  width: 40%;
+  width: 30%;
   text-align: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   margin: 2em auto;
   padding: .5em 0;
-  background-color: #00ff40;
   border-radius: 20px;
   border: none;
+}
+
+.container .main .create main button:hover {
+  background-color: #1295ac;
+  color: #fff;
+  -webkit-box-shadow: 0 0 3px #fff;
+          box-shadow: 0 0 3px #fff;
 }
 
 .container .main .homework,
 .container .main .recent,
 .container .main .deadline {
   display: none;
+  width: 55%;
+  margin: auto;
+}
+
+.container .main .homework h1,
+.container .main .recent h1,
+.container .main .deadline h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 60px;
 }
 
 .container .main .homework main ul,
@@ -160,12 +255,11 @@ body,
 .container .main .deadline main ul li {
   margin: 1em;
   padding: .5em 1em;
-  background-color: whitesmoke;
-  -webkit-box-shadow: 2px 2px 5px rgba(202, 201, 201, 0.5), -2px -2px 5px rgba(202, 201, 201, 0.5);
-          box-shadow: 2px 2px 5px rgba(202, 201, 201, 0.5), -2px -2px 5px rgba(202, 201, 201, 0.5);
+  background-color: #bce3f1;
   list-style: none;
   overflow: hidden;
   border-radius: 20px;
+  border: 6px double #1295ac;
 }
 
 .container .main .homework main ul li h2,
@@ -190,10 +284,10 @@ body,
 .container .main .homework main ul li button,
 .container .main .recent main ul li button,
 .container .main .deadline main ul li button {
-  background-color: #bbb;
+  background-color: white;
   float: right;
-  padding: .2em 1em;
-  margin: 0 1em .8em 0;
+  padding: .5em 1.5em;
+  margin: 0 .8em .5em 0;
   border: none;
   border-radius: 5px;
 }
@@ -201,7 +295,7 @@ body,
 .container .main .homework main ul li button:hover,
 .container .main .recent main ul li button:hover,
 .container .main .deadline main ul li button:hover {
-  color: whitesmoke;
+  color: #fff;
 }
 
 .container .main .homework button:hover {
@@ -221,7 +315,7 @@ body,
     opacity: 0;
   }
   100% {
-    width: 200px;
+    width: 300px;
     opacity: 1;
   }
 }
@@ -234,66 +328,66 @@ body,
     opacity: 0;
   }
   100% {
-    width: 200px;
+    width: 300px;
     opacity: 1;
   }
 }
 
-@-webkit-keyframes liAnimation {
+@-webkit-keyframes LiAnimation {
   0% {
-    margin-right: 2em;
-    margin-right: 2em;
-    opacity: 1;
-  }
-  25% {
-    margin-right: 5em;
-    margin-left: -5em;
-    opacity: 1;
+    width: 300px;
+    background-color: aliceblue;
   }
   50% {
-    margin-right: -5em;
-    margin-left: 5em;
     opacity: 1;
   }
   100% {
-    margin-right: 2em;
-    margin-left: 2em;
-    opacity: 1;
+    width: 0;
+    display: none;
   }
 }
 
-@keyframes liAnimation {
+@keyframes LiAnimation {
   0% {
-    margin-right: 2em;
-    margin-right: 2em;
-    opacity: 1;
-  }
-  25% {
-    margin-right: 5em;
-    margin-left: -5em;
-    opacity: 1;
+    width: 300px;
+    background-color: aliceblue;
   }
   50% {
-    margin-right: -5em;
-    margin-left: 5em;
     opacity: 1;
   }
   100% {
-    margin-right: 2em;
-    margin-left: 2em;
-    opacity: 1;
+    width: 0;
+    display: none;
   }
 }
 
 @-webkit-keyframes deadlineAnimation {
   50% {
-    font-size: 1.5em;
+    font-size: .5em;
   }
 }
 
 @keyframes deadlineAnimation {
   50% {
-    font-size: 1.5em;
+    font-size: .5em;
+  }
+}
+
+@-webkit-keyframes display {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes display {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

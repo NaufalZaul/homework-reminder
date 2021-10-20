@@ -1,21 +1,46 @@
 import React from 'react'
 import './style.css';
+import image from "E:/Pelatihan coding/#POST GITHUB/todo-list/src/image/IG.png";
 
 class Menu extends React.Component{
   render(){
     return(
-      <div className='menu'>
+      <div className='menu menuClose'>
         <div className='div'>
-          <i class="fas fa-align-justify" id='menu' onClick={this.props.menu}></i>
+
+          <i class="fas fa-align-justify" id='menu-icon' onClick={this.props.menuAndClose}></i>
+
+          <i class="far fa-bell" id='notification' onClick={this.props.menuAndClose}>
+            <span></span>
+          </i>
+
+          <i class="far fa-question-circle" id='question' onClick={this.props.menuAndClose}></i>
+          
+          <i class="far fa-comment-dots" id='message' onClick={this.props.menuAndClose}>
+          </i>        
+
+          <button type='submit' className='close'>
+            <i class="fas fa-times" id='close' onClick={this.props.menuAndClose}></i>
+          </button>
           <main>
             <ul>
-              <li id='create' onClick={this.props.menu}>Create</li>
-              <li id='homework' onClick={this.props.menu}>Homework</li>
-              <li id='deadline' onClick={this.props.menu}>
-                Deadline 
-                <i class="fas fa-exclamation"></i>
+              <li id='create' onClick={this.props.menu}> 
+                <i class="far fa-calendar-times"></i>
+                &nbsp; Buat
               </li>
-              <li id='recent' onClick={this.props.menu}>Recent</li>
+              <li id='homework' onClick={this.props.menu}>
+                <i class="far fa-bookmark"></i>
+                &nbsp; Tugas
+              </li>
+              <li id='deadline' onClick={this.props.menu}>
+                <i class="far fa-bell"></i>
+                &nbsp; Masa Tenggat
+                <span><i class="fas fa-exclamation warning"></i></span>
+              </li>
+              <li id='recent' onClick={this.props.menu}>
+                <i class="far fa-trash-alt"></i>
+                &nbsp; Akhir
+              </li>
             </ul>
           </main>
         </div>
@@ -45,14 +70,14 @@ class Create extends React.Component {
 
 class CreateClass extends React.Component {
   render() {
-      return (
-        <div className={this.props.judulClass}>
-          <h1>{this.props.judul}</h1>
-          <main>
-            <ul></ul>
-          </main>
-        </div>
-      )
+    return (
+      <div className={this.props.judulClass}>
+        <h1>{this.props.judul}</h1>
+        <main>
+          <ul></ul>
+        </main>
+      </div>
+    )
   }
 }
 
@@ -96,7 +121,8 @@ const display=(cls1,  cls3, cls4, cls5)=>{
 
 
 var x = setInterval(()=>{
-  let day = ['Sunday', 'Monday', 'Thursday', 'Wednesday', 'Tuesday', 'Friday', 'Saturday']
+  // let day = ['Sunday', 'Monday', 'Thursday', 'Wednesday', 'Tuesday', 'Friday', 'Saturday']
+  let day = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"]
   var getDay = new Date().getDay()
   var getMonth = new Date().getMonth()
   var getYear = new Date().getFullYear()
@@ -107,7 +133,9 @@ var x = setInterval(()=>{
   
   findDue(getYear, getMonth, getDate)
 
-  document.getElementById("demo").innerHTML = day[getDay] + "&emsp;" + controlZero(getYear) + "-" + controlZero((getMonth + 1)) + "-" + controlZero(getDate) + "&emsp;" + controlZero(getHour) + ':' + controlZero(getMinutes) + ":" + controlZero(getSeconds)
+  notification()
+
+  document.getElementById("demo").innerHTML = "Hari " + day[getDay] + ", &emsp;" + controlZero(getYear) + "-" + controlZero((getMonth + 1)) + "-" + controlZero(getDate) + "&emsp;" + controlZero(getHour) + ':' + controlZero(getMinutes) + ":" + controlZero(getSeconds)
 }, 1000)
 
 const findDue = (year, month, date) => {
@@ -121,14 +149,14 @@ const findDue = (year, month, date) => {
   const findDateTime = findTimeObj.indexOf(dateTime)
 
   if( findTimeObj[findDateTime] == dateTime ){
-      notification(findDateTime)
+    createElementInDeadline(findDateTime)
       create.splice(findDateTime, 1)
       homework.splice(findDateTime, 1)
       alert('you have a deadline')
     }
   }
   
-  function notification(index){
+  function createElementInDeadline(index){
   const k = homework[index]
   deadline.push(k)
   
@@ -141,20 +169,29 @@ const findDue = (year, month, date) => {
     ul.append(obj)
     return ul;
   })
-  const i = document.querySelector('.menu #deadline i')
+}
+
+const notification=()=>{
+  const i = document.querySelector('.menu #deadline .fas')
+  const k = document.querySelector('.menu #notification span')
+
   if(!deadline.length == 0) {
     i.style.display = 'inline'
+    k.classList.add('notification')
+    k.innerText = deadline.length
+  } else {
+    i.style.display = 'none'
+    k.classList.remove('notification')
+    k.innerText = ''
   }
 }
 
-function controlZero(zero){
-  return (zero < 10) ? "0" + zero : zero
-}
-
-function LI(e){
+function createElementInRecent(e){
   const target = e.target.parentElement
   recent.push(target)
   target.remove()
+
+
 
   recent.map((obj)=>{
     obj.lastChild.remove()
@@ -167,12 +204,16 @@ function LI(e){
   })
 }
 
+function controlZero(zero){
+  return (zero < 10) ? "0" + zero : zero
+}
+
+
+
 
 document.addEventListener('click',function(e) {  
-  if(e.target.className == 'buat'){
-    // inputUL()
-  } else if(e.target.className == 'clear') {
-    LI(e)
+  if(e.target.className == 'clear') {
+    createElementInRecent(e)
   } else if(e.target.className == 'deleteRecent'){
     const d = recent.indexOf(e.target.parentElement)
     recent.splice(d,1)
@@ -181,11 +222,6 @@ document.addEventListener('click',function(e) {
     const s = deadline.indexOf(e.target.parentElement)
     deadline.splice(s,1)
     e.target.parentElement.remove()
-
-    const i = document.querySelector('.menu div #deadline i')
-    if(deadline.length == 0) {
-      i.style.display = 'none'
-    }
   }
 })
 
@@ -196,17 +232,34 @@ document.addEventListener('click',function(e) {
 
 class App extends React.Component {
 
-  menuClick(e){
+  menuAndClose(e){
+    let rules = 'Ini adalah sebuah projek yag bernama "HOMEWORK REMINDER" yang berguna untuk membantu pekerjaan rumah atau bisa disebut PR.<br><br>Langkah - Langkah Dalam Membuat Sebuah Pengingat, antara lain:<br> 1. Buka menu yang terletak dibaian kiri atas<br> 2. Klik pilihan "Create"<br> 3. Pada layar utama akan disediakan sebuah form, Anda wajib mengisi seluruh isi dari form tersebut<br> 4. Setelah itu, klik tombol "Buat"<br><br> Pengingat tersebut akan otomatis terimpan pada menu "Homework". Saat pengingat tersebut sudah jatuh tempo, maka pengingat tersebut akan masuk pada menu "Deadline", dan akan diberikan sebuah notifikasi untuk segera menyelesaikannya. Pada menu "Recent" berisi sampah dari pengingat tugas sebelumnya, dan dianjurkan untuk menghapusnya.'
+
+    const target = e.target
     const main = document.querySelector('.menu main')
     const menu = document.querySelector('.container')
+    const menua = document.querySelector('.container main')
+
+
+    if(target.id == 'menu-icon' || target.id == 'close'){
+      main.classList.toggle('toggleDisplay')
+      menu.firstChild.classList.toggle('menuDisplay')
+      menu.firstChild.classList.toggle('menuClose')
+    }else if(target.id == 'notification') {
+      if(!deadline.length == 0) {
+        main.classList.add('toggleDisplay')
+        menu.firstChild.classList.toggle('menuDisplay')
+        menu.firstChild.classList.toggle('menuClose')
+      }
+    }else if(target.id == 'question'){
+      alert(rules)
+    } 
+  }
+
+  menuClick(e){
     const target = e.target
 
-    // console.log(menu)
-
-    if(target.id == 'menu'){
-      menu.firstChild.classList.toggle('menuDisplay')
-      main.classList.toggle('toggleDisplay')
-    } else if(target.id == 'create'){
+    if(target.id == 'create'){
       display('create', 'homework', 'recent', 'deadline')
     } else if(target.id == 'homework'){
       display('homework', 'create', 'recent', 'deadline')
@@ -235,9 +288,10 @@ class App extends React.Component {
   
       li.append(createElement('h2', valueName), createElement('p', valueDes), createElement('h4', valueTime),createBTN('Selesai','clear'))
       
+      
       return li
     })
-  
+    
     const z = b[b.length - 1]
     homework.push(z)
     const ul = document.querySelector('.homework ul')
@@ -245,15 +299,22 @@ class App extends React.Component {
     return ul;
   }
 
+  // welcome(){
+  //   return deadline.length
+  // }
+
   render() {
+    // this.welcome()
     return (
       <div className='container'>
         <Menu 
+          menuAndClose={this.menuAndClose}
           menu={this.menuClick}
+          // notif={this.welcome}
         />
         <div className='main'>
           <div className='header'>
-            <h1>Homework Reminder &ensp; <i class="far fa-bell"></i></h1>
+            <h1>Homework Reminder</h1>
             <p id='demo'></p>
           </div>
           <Create 
