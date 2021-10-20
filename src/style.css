@@ -23,11 +23,11 @@ body,
 .container .menu {
   position: fixed;
   height: 100%;
-  padding-top: .5em;
 }
 
 .container .menu .div {
   height: 100%;
+  padding-top: .5em;
   z-index: 999;
   display: inline-block;
 }
@@ -40,6 +40,20 @@ body,
   font-size: 1.5em;
   color: #fff;
   cursor: pointer;
+}
+
+.container .menu #notification,
+.container .menu #question,
+.container .menu #message {
+  font-size: 1.5em;
+  -webkit-transition: font-size .5s;
+  transition: font-size .5s;
+}
+
+.container .menu #notification:hover,
+.container .menu #question:hover,
+.container .menu #message:hover {
+  font-size: 2em;
 }
 
 .container .menu #notification {
@@ -73,10 +87,11 @@ body,
   list-style: none;
   -webkit-animation: menuAnimation .8s ease forwards;
           animation: menuAnimation .8s ease forwards;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
 }
 
 .container .menu .toggleDisplay ul li:hover {
-  opacity: 1;
   text-align: center;
   padding: .2em 0;
   background-color: #94d2bd;
@@ -391,19 +406,23 @@ body,
   }
 }
 
-@media (max-width: 413px) {
+@media (max-width: 362px) {
   .container .menu .toggleDisplay ul li {
     font-size: 15px;
   }
   .container .main .header h1 {
     font-size: 22px;
+    text-align: center;
   }
   .container .main .header p {
     margin: 2em auto;
     font-size: 10px;
   }
-  .container .main .create main {
+  .container .main .create {
     width: 100%;
+    padding: .5em 1em;
+  }
+  .container .main .create main {
     margin: auto;
   }
   .container .main .create main label {
@@ -412,11 +431,18 @@ body,
   .container .main .create h1 {
     font-size: 22px;
     text-align: center;
+    margin-bottom: 0;
   }
   .container .main .homework,
   .container .main .recent,
   .container .main .deadline {
     margin: 1em auto;
+    width: 100%;
+  }
+  .container .main .homework main ul li,
+  .container .main .recent main ul li,
+  .container .main .deadline main ul li {
+    margin: .5em auto;
   }
   .container .main .homework h1,
   .container .main .recent h1,
